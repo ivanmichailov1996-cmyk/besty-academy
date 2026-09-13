@@ -6,7 +6,7 @@ import { BASE_PATH } from "@/lib/basePath";
 export default function HomePage() {
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-16">
-      <section className="mb-14 overflow-hidden rounded-3xl relative">
+      <section className="pop-in mb-14 overflow-hidden rounded-3xl relative">
         <Image
           src={`${BASE_PATH}/images/welcome/restaurant-exterior.jpg`}
           alt="Ресторан Besty"
@@ -43,7 +43,8 @@ export default function HomePage() {
 
       <Link
         href="/welcome"
-        className="group flex flex-wrap sm:flex-nowrap items-center gap-5 rounded-3xl bg-brand p-6 sm:p-8 mb-4 hover:brightness-95 transition-all overflow-hidden"
+        style={{ animationDelay: "80ms" }}
+        className="pop-in group flex flex-wrap sm:flex-nowrap items-center gap-5 rounded-3xl bg-brand p-6 sm:p-8 mb-4 hover:brightness-95 hover:scale-[1.01] transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] overflow-hidden"
       >
         <div className="flex-1 min-w-[200px]">
           <span className="label-eyebrow text-xs text-brand-ink/70">Начни здесь</span>
@@ -65,7 +66,7 @@ export default function HomePage() {
         </span>
       </Link>
 
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="stagger grid sm:grid-cols-2 gap-4">
         {sections.map((section, i) => {
           const readyCount = section.lessons.filter((l) => l.ready).length;
           const surfaces = ["bg-surface-amber", "bg-surface-blush", "bg-surface-sage"];
@@ -74,7 +75,7 @@ export default function HomePage() {
             <Link
               key={section.slug}
               href={`/${section.slug}`}
-              className={`group rounded-2xl ${surface} p-6 sm:p-7 hover:brightness-[0.97] transition-all`}
+              className={`group rounded-2xl ${surface} p-6 sm:p-7 hover:brightness-[0.97] hover:scale-[1.015] transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]`}
             >
               <div className="flex items-start justify-between gap-3">
                 <span className="text-3xl">{section.emoji}</span>

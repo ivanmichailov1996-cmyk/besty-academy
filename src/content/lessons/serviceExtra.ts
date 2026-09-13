@@ -645,6 +645,7 @@ export const serviceExtraLessons: Lesson[] = [
         tone: "warning",
         text: "Если посуда повреждена (сколы, трещины) — её нужно немедленно утилизировать в специальный контейнер для битой посуды, а не пускать в оборот.",
       },
+      { type: "video", src: "/videos/tableware.mp4", caption: "Видео: посуда и сервировка" },
     ],
     quiz: [
       {
@@ -2285,6 +2286,7 @@ export const serviceExtraLessons: Lesson[] = [
           "В конце появится сообщение «ЗАПОЛНЕНО?» — проверьте уровень заполнения и нажмите соответствующую кнопку «Да» или «Нет».",
         ],
       },
+      { type: "video", src: "/videos/potato-station.mp4", caption: "Видео: картофельная станция" },
     ],
     quiz: [
       {

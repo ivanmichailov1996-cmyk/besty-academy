@@ -24,7 +24,7 @@ export default async function LessonPage(props: PageProps<"/[section]/[lesson]">
         ← {section.title}
       </Link>
 
-      <article className="mt-4">
+      <article className="pop-in mt-4">
         <h1 className="font-display text-3xl sm:text-4xl text-brand-ink leading-tight">
           {lesson.title}
         </h1>

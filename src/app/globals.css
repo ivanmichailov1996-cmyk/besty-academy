@@ -62,3 +62,71 @@ body {
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
+
+/*
+  Motion system, matching the mymind reference: primary entrances use a
+  fast-in-slow-out curve at 0.7s so elements arrive with momentum and settle
+  gently (like something placed, not dropped), rather than a plain opacity
+  fade. Hover/interaction transitions stay quick (see the `transition` /
+  `duration-*` classes used inline in components) — this pop-in keyframe is
+  only for content appearing on load.
+*/
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pop-in {
+  animation: pop-in 0.7s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+/* Applied to a grid/list container to stagger its direct children's pop-in
+   by position, echoing mymind's "elements settle in sequence" pacing. */
+.stagger > * {
+  animation: pop-in 0.7s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 60ms; }
+.stagger > *:nth-child(3) { animation-delay: 120ms; }
+.stagger > *:nth-child(4) { animation-delay: 180ms; }
+.stagger > *:nth-child(5) { animation-delay: 240ms; }
+.stagger > *:nth-child(6) { animation-delay: 300ms; }
+.stagger > *:nth-child(n + 7) { animation-delay: 360ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pop-in,
+  .stagger > * {
+    animation: none;
+  }
+}
+
+/*
+  Scroll reveal for long single-page flows (the Welcome course): sections
+  start slightly lowered and transparent, then settle into place as they
+  enter the viewport (see the IntersectionObserver hook in WelcomeCourse.tsx)
+  — the same settle-in feel as .pop-in, triggered by scroll instead of load.
+*/
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1), transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

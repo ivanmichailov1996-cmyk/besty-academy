@@ -81,7 +81,7 @@ function MarkDoneButton({ done, onClick }: { done: boolean; onClick: () => void 
     <button
       type="button"
       onClick={onClick}
-      className={`inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-sm font-bold transition-colors ${
+      className={`inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-sm font-bold transition-all duration-200 ease-out hover:scale-[1.03] ${
         done
           ? "border-green-600 bg-green-50 text-green-700"
           : "border-neutral-300 text-neutral-600 hover:border-brand-ink"
@@ -100,7 +100,13 @@ function Card({ tone = "light", children }: { tone?: "light" | "brand" | "accent
     accent: "bg-accent text-white",
     dark: "bg-neutral-900 text-white",
   };
-  return <div className={`rounded-2xl p-5 sm:p-6 ${styles[tone]}`}>{children}</div>;
+  return (
+    <div
+      className={`rounded-2xl p-5 sm:p-6 transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] hover:scale-[1.015] ${styles[tone]}`}
+    >
+      {children}
+    </div>
+  );
 }
 
 const PRINCIPLES = [
@@ -174,14 +180,40 @@ const EQUIPMENT_TAGS = [
   "Тостер",
 ];
 
+function useScrollReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window)) {
+      // No IntersectionObserver support — show everything immediately rather
+      // than leaving sections permanently hidden.
+      els.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+}
+
 export function WelcomeCourse() {
   const { done, toggle } = useProgress();
   const progressPct = useMemo(() => Math.round((done.size / NAV.length) * 100), [done]);
+  useScrollReveal();
 
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 sm:py-12">
       {/* Hero */}
-      <div className="rounded-[2rem] bg-brand overflow-hidden grid lg:grid-cols-2 gap-0 mb-8">
+      <div className="pop-in rounded-[2rem] bg-brand overflow-hidden grid lg:grid-cols-2 gap-0 mb-8">
         <div className="p-6 sm:p-10 flex flex-col justify-center">
           <p className="label-eyebrow text-xs text-brand-ink/70 mb-3">Курс для новых сотрудников</p>
           <h1 className="font-display text-4xl sm:text-5xl text-brand-ink leading-[1.05] mb-4">
@@ -191,14 +223,17 @@ export function WelcomeCourse() {
             Сегодня твой первый день, и мы знаем, как это волнительно. Познакомься с рестораном,
             командой и главными правилами работы — а самое интересное будет на практике.
           </p>
-          <div className="grid grid-cols-4 gap-2 sm:gap-3 mb-2">
+          <div className="stagger grid grid-cols-4 gap-2 sm:gap-3 mb-2">
             {[
               ["12", "разделов"],
               ["6", "принципов"],
               ["5", "начислений"],
               ["8", "видов оборудования"],
             ].map(([n, label]) => (
-              <div key={label} className="bg-white/70 rounded-2xl px-2 py-3 text-center">
+              <div
+                key={label}
+                className="bg-white/70 rounded-2xl px-2 py-3 text-center transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] hover:scale-105"
+              >
                 <p className="text-xl sm:text-2xl font-black text-brand-ink">{n}</p>
                 <p className="text-[11px] leading-tight text-brand-ink/70">{label}</p>
               </div>
@@ -275,7 +310,7 @@ export function WelcomeCourse() {
           </div>
 
           {/* 01 О ресторане */}
-          <section id="restaurant" className="scroll-mt-24">
+          <section id="restaurant" className="reveal scroll-mt-24">
             <Eyebrow>Знакомство</Eyebrow>
             <SectionHeader number="01">О ресторане</SectionHeader>
             <div className="grid sm:grid-cols-2 gap-4 mt-5">
@@ -303,10 +338,10 @@ export function WelcomeCourse() {
           </section>
 
           {/* 02 Команда */}
-          <section id="team" className="scroll-mt-24">
+          <section id="team" className="reveal scroll-mt-24">
             <Eyebrow>Люди Besty</Eyebrow>
             <SectionHeader number="02">Команда ресторана</SectionHeader>
-            <div className="grid sm:grid-cols-3 gap-3 mt-5">
+            <div className="stagger grid sm:grid-cols-3 gap-3 mt-5">
               {TEAM.map((t) => (
                 <Card key={t.role}>
                   <p className="font-bold text-brand-ink mb-1">{t.role}</p>
@@ -320,10 +355,10 @@ export function WelcomeCourse() {
           </section>
 
           {/* 03 6 принципов */}
-          <section id="principles" className="scroll-mt-24">
+          <section id="principles" className="reveal scroll-mt-24">
             <Eyebrow>Гость в центре</Eyebrow>
             <SectionHeader number="03">6 принципов сервиса Besty</SectionHeader>
-            <div className="grid sm:grid-cols-2 gap-3 mt-5">
+            <div className="stagger grid sm:grid-cols-2 gap-3 mt-5">
               {PRINCIPLES.map((p) => (
                 <Card key={p.title} tone={p.tone}>
                   <p className="font-bold mb-1.5">{p.title}</p>
@@ -346,7 +381,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* 04 Факты о качестве */}
-          <section id="quality" className="scroll-mt-24">
+          <section id="quality" className="reveal scroll-mt-24">
             <Eyebrow>Наш продукт</Eyebrow>
             <SectionHeader number="04">Факты о нашем качестве</SectionHeader>
             <div className="grid grid-cols-3 gap-3 mt-5">
@@ -376,7 +411,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* 05 Внешний вид и данные */}
-          <section id="appearance" className="scroll-mt-24">
+          <section id="appearance" className="reveal scroll-mt-24">
             <Eyebrow>Трудовой распорядок</Eyebrow>
             <SectionHeader number="05">Внешний вид, гигиена и данные</SectionHeader>
             <div className="grid sm:grid-cols-2 gap-4 mt-5">
@@ -407,7 +442,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* 06 Обязанности */}
-          <section id="duties" className="scroll-mt-24">
+          <section id="duties" className="reveal scroll-mt-24">
             <Eyebrow>Работа на позиции</Eyebrow>
             <SectionHeader number="06">Должностные обязанности</SectionHeader>
             <div className="grid sm:grid-cols-2 gap-4 mt-5">
@@ -438,7 +473,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* 07 Рабочее время */}
-          <section id="worktime" className="scroll-mt-24">
+          <section id="worktime" className="reveal scroll-mt-24">
             <Eyebrow>Расписание</Eyebrow>
             <SectionHeader number="07">Рабочее время и перерывы</SectionHeader>
             <Card>
@@ -477,7 +512,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* 08 Выплаты и возможности */}
-          <section id="pay" className="scroll-mt-24">
+          <section id="pay" className="reveal scroll-mt-24">
             <Eyebrow>Мотивация</Eyebrow>
             <SectionHeader number="08">Выплаты, начисления и возможности</SectionHeader>
             <div className="grid sm:grid-cols-2 gap-4 mt-5">
@@ -527,7 +562,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* 09 Правила безопасности */}
-          <section id="safety" className="scroll-mt-24">
+          <section id="safety" className="reveal scroll-mt-24">
             <Eyebrow>Общие правила</Eyebrow>
             <SectionHeader number="09">Правила безопасности</SectionHeader>
             <div className="grid sm:grid-cols-2 gap-3 mt-5">
@@ -549,7 +584,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* 10 Охрана труда / оборудование */}
-          <section id="equipment" className="scroll-mt-24">
+          <section id="equipment" className="reveal scroll-mt-24">
             <Eyebrow>Оборудование</Eyebrow>
             <SectionHeader number="10">Охрана труда</SectionHeader>
             <p className="text-neutral-600 mt-2 mb-4">
@@ -620,7 +655,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* 11 Пожарная безопасность */}
-          <section id="fire" className="scroll-mt-24">
+          <section id="fire" className="reveal scroll-mt-24">
             <Eyebrow>Экстренная ситуация</Eyebrow>
             <SectionHeader number="11">Пожарная безопасность</SectionHeader>
             <div className="grid sm:grid-cols-2 gap-4 mt-5">
@@ -650,7 +685,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* 12 Электробезопасность */}
-          <section id="electrical" className="scroll-mt-24">
+          <section id="electrical" className="reveal scroll-mt-24">
             <Eyebrow>Основные правила</Eyebrow>
             <SectionHeader number="12">Электробезопасность</SectionHeader>
             <Card tone="dark">
@@ -666,7 +701,7 @@ export function WelcomeCourse() {
             </div>
           </section>
 
-          <section id="welcome-video" className="scroll-mt-24">
+          <section id="welcome-video" className="reveal scroll-mt-24">
             <Eyebrow>Видео</Eyebrow>
             <SectionHeader number="✓">Приветственное видео</SectionHeader>
             <Card tone="light">
@@ -679,7 +714,7 @@ export function WelcomeCourse() {
           </section>
 
           {/* Финальный тест */}
-          <section id="final-quiz" className="scroll-mt-24">
+          <section id="final-quiz" className="reveal scroll-mt-24">
             <Eyebrow>Итоги</Eyebrow>
             <SectionHeader number="✓">Проверь себя по всему курсу</SectionHeader>
             <Quiz sectionSlug="welcome" lessonSlug="final-quiz" questions={welcomeFinalQuiz} />

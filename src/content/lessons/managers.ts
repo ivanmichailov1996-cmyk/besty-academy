@@ -2347,6 +2347,32 @@ export const managerLessons: Lesson[] = [
         tone: "success",
         text: "Если после тебя команда стала сильнее — ты лидер. Лидерство начинается с ответственности, ответственность рождает доверие, доверие превращает команду в силу.",
       },
+      { type: "heading", text: "Видео семинара для менеджеров" },
+      {
+        type: "video",
+        src: "/videos/manager-seminar-1.mp4",
+        caption: "Видео: руководство менеджера (часть 1–4)",
+      },
+      {
+        type: "video",
+        src: "/videos/manager-seminar-2.mp4",
+        caption: "Видео: инструменты менеджера (часть 4–5)",
+      },
+      {
+        type: "video",
+        src: "/videos/manager-seminar-3.mp4",
+        caption: "Видео: от пожарного к дирижёру (часть 6–7)",
+      },
+      {
+        type: "video",
+        src: "/videos/manager-seminar-4.mp4",
+        caption: "Видео: управление людьми (часть 8–9)",
+      },
+      {
+        type: "video",
+        src: "/videos/manager-seminar-5.mp4",
+        caption: "Видео: от исполнителя к лидеру (часть 10–11)",
+      },
     ],
     quiz: [
       {

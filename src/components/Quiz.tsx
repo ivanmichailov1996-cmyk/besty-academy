@@ -91,7 +91,7 @@ export function Quiz({
                   const isSelected = selected === optionIndex;
                   const isCorrect = optionIndex === q.correctIndex;
                   let cls =
-                    "text-left rounded-xl border px-4 py-2.5 text-sm transition-colors cursor-pointer";
+                    "text-left rounded-xl border px-4 py-2.5 text-sm transition-all duration-200 ease-out cursor-pointer hover:scale-[1.01]";
                   if (submitted) {
                     if (isCorrect) cls += " border-green-500 bg-green-50 text-green-900";
                     else if (isSelected && !isCorrect) cls += " border-red-400 bg-red-50 text-red-800";
@@ -125,7 +125,7 @@ export function Quiz({
             type="button"
             onClick={handleSubmit}
             disabled={!allAnswered}
-            className="rounded-full bg-brand text-brand-ink font-bold px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-95 transition"
+            className="rounded-full bg-brand text-brand-ink font-bold px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-95 hover:scale-[1.02] transition-all duration-200 ease-out"
           >
             Проверить ответы
           </button>
@@ -137,7 +137,7 @@ export function Quiz({
             <button
               type="button"
               onClick={handleRetry}
-              className="rounded-full border-2 border-brand text-brand-ink font-bold px-5 py-2 hover:bg-brand/10 transition"
+              className="rounded-full border-2 border-brand text-brand-ink font-bold px-5 py-2 hover:bg-brand/10 hover:scale-[1.02] transition-all duration-200 ease-out"
             >
               Пройти ещё раз
             </button>
