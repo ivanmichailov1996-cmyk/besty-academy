@@ -5,8 +5,25 @@ import { BASE_PATH } from "@/lib/basePath";
 
 export default function HomePage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-16">
-      <section className="pop-in mb-14 overflow-hidden rounded-3xl relative">
+    <div className="relative overflow-hidden">
+      {/*
+        The big warm radial "bloom" from the mymind reference's homepage —
+        pure color-as-atmosphere rather than a photo, built from Besty's own
+        brand orange. Sits behind the (real, photographic) hero card, so it
+        shows mainly as a warm glow in the page margins above/around it
+        rather than replacing the restaurant photo.
+      */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-56 left-1/2 -translate-x-1/2 w-[1100px] max-w-[160vw] aspect-square rounded-full blur-3xl opacity-70"
+        style={{
+          background:
+            "radial-gradient(circle, #ff9d1f 0%, #ffc35c 28%, #ffe9b0 48%, rgba(255,253,245,0) 72%)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-16">
+        <section className="pop-in mb-14 overflow-hidden rounded-3xl relative">
         <Image
           src={`${BASE_PATH}/images/welcome/restaurant-exterior.jpg`}
           alt="Ресторан Besty"
@@ -88,6 +105,7 @@ export default function HomePage() {
             </Link>
           );
         })}
+        </div>
       </div>
     </div>
   );

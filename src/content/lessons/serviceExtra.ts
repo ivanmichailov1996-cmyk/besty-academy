@@ -312,6 +312,8 @@ export const serviceExtraLessons: Lesson[] = [
         tone: "info",
         text: "Опытный сотрудник знает: то, что уместно по отношению к одному гостю, недопустимо по отношению к другому. Разные гости требуют разного подхода.",
       },
+      { type: "heading", text: "Видео: психология гостей" },
+      { type: "video", src: "/videos/guest-psychology.mp4", caption: "Видео: психология гостей" },
     ],
     quiz: [
       {
@@ -852,6 +854,8 @@ export const serviceExtraLessons: Lesson[] = [
         tone: "success",
         text: "Готовность к приёму гостей — финальная проверка кассира перед началом работы: рабочее место укомплектовано, оборудование исправно, настрой доброжелательный.",
       },
+      { type: "heading", text: "Видео: приём заказа и оплата на прилавке" },
+      { type: "video", src: "/videos/counter-payment.mp4", caption: "Видео: приём заказа и оплата на прилавке" },
     ],
     quiz: [
       {

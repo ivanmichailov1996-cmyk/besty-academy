@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { sections, getSection } from "@/content/sections";
+import { CourseNav } from "@/components/CourseNav";
 
 export function generateStaticParams() {
   return sections.map((s) => ({ section: s.slug }));
@@ -12,18 +13,25 @@ export default async function SectionPage(props: PageProps<"/[section]">) {
   if (!section) notFound();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-10 sm:py-14">
-      <Link href="/" className="text-sm font-semibold text-neutral-500 hover:text-brand-dark">
-        ← Все разделы
-      </Link>
+    <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10 sm:py-14 grid lg:grid-cols-[260px_1fr] gap-10">
+      <aside className="hidden lg:block">
+        <div className="sticky top-24">
+          <CourseNav currentSection={section.slug} />
+        </div>
+      </aside>
 
-      <div className="pop-in mt-4 mb-10">
-        <span className="text-4xl">{section.emoji}</span>
-        <h1 className="mt-3 font-display text-3xl sm:text-5xl text-brand-ink">{section.title}</h1>
-        <p className="mt-2 text-neutral-600">{section.description}</p>
-      </div>
+      <div className="min-w-0">
+        <Link href="/" className="text-sm font-semibold text-neutral-500 hover:text-brand-dark">
+          ← Все разделы
+        </Link>
 
-      <ul className="stagger space-y-3">
+        <div className="pop-in mt-4 mb-10">
+          <span className="text-4xl">{section.emoji}</span>
+          <h1 className="mt-3 font-display text-3xl sm:text-5xl text-brand-ink">{section.title}</h1>
+          <p className="mt-2 text-neutral-600">{section.description}</p>
+        </div>
+
+        <ul className="stagger space-y-3">
         {section.lessons.map((lesson, i) => {
           const surfaces = ["bg-surface-amber", "bg-surface-blush", "bg-surface-sage"];
           const surface = surfaces[i % surfaces.length];
@@ -56,7 +64,8 @@ export default async function SectionPage(props: PageProps<"/[section]">) {
             </li>
           );
         })}
-      </ul>
+        </ul>
+      </div>
     </div>
   );
 }

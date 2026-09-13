@@ -93,3 +93,20 @@ export function getLesson(sectionSlug: string, lessonSlug: string) {
   const lesson = section?.lessons.find((l) => l.slug === lessonSlug);
   return { section, lesson };
 }
+
+// Flattened, ready-only (section, lesson) pairs in the order sections and
+// their lessons are defined above — the same order the site's navigation
+// presents them in. Used to compute "next lesson" links so learners can
+// move through a whole section (and on into the next one) without
+// backtracking to the section list each time.
+const readyLessonSequence: { section: Section; lesson: Lesson }[] = sections.flatMap((section) =>
+  section.lessons.filter((l) => l.ready).map((lesson) => ({ section, lesson }))
+);
+
+export function getNextLesson(sectionSlug: string, lessonSlug: string) {
+  const index = readyLessonSequence.findIndex(
+    (entry) => entry.section.slug === sectionSlug && entry.lesson.slug === lessonSlug
+  );
+  if (index === -1 || index === readyLessonSequence.length - 1) return null;
+  return readyLessonSequence[index + 1];
+}
