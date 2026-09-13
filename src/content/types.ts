@@ -9,7 +9,8 @@ export type ContentBlock =
   | { type: "image"; src: string; alt: string; caption?: string }
   | { type: "imageGrid"; images: { src: string; alt: string; caption?: string }[] }
   | { type: "diagram"; name: string; caption?: string }
-  | { type: "video"; src: string; caption?: string; poster?: string };
+  | { type: "video"; src: string; caption?: string; poster?: string }
+  | { type: "audio"; src: string; title?: string; caption?: string };
 
 export type QuizQuestion = {
   question: string;

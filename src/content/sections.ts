@@ -23,6 +23,7 @@ const serviceOrder = [
   "auto-dispensing",
   "sales-techniques",
   "cashier-memo",
+  "loyalty-program",
   "guest-psychology",
   "guest-scripts",
   "go-list",

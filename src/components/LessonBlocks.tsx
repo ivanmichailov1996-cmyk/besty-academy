@@ -138,6 +138,23 @@ export function LessonBlocks({ blocks }: { blocks: ContentBlock[] }) {
                 )}
               </figure>
             );
+          case "audio":
+            return (
+              <figure key={i} className="my-5 rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
+                {block.title && (
+                  <figcaption className="mb-2 flex items-center gap-2 text-sm font-bold text-brand-ink">
+                    <span aria-hidden>🎧</span>
+                    {block.title}
+                  </figcaption>
+                )}
+                <audio controls preload="none" className="w-full">
+                  <source src={`${BASE_PATH}${block.src}`} type="audio/mp4" />
+                </audio>
+                {block.caption && (
+                  <p className="mt-2 text-center text-xs text-neutral-500">{block.caption}</p>
+                )}
+              </figure>
+            );
           case "table":
             return (
               <div key={i} className="overflow-x-auto rounded-2xl border border-neutral-200">

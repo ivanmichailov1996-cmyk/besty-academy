@@ -15,10 +15,10 @@ export default function HomePage() {
       */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-56 left-1/2 -translate-x-1/2 w-[1100px] max-w-[160vw] aspect-square rounded-full blur-3xl opacity-70"
+        className="pointer-events-none absolute -top-36 sm:-top-44 left-1/2 -translate-x-1/2 w-[1150px] sm:w-[1300px] max-w-[180vw] aspect-square rounded-full blur-2xl opacity-85"
         style={{
           background:
-            "radial-gradient(circle, #ff9d1f 0%, #ffc35c 28%, #ffe9b0 48%, rgba(255,253,245,0) 72%)",
+            "radial-gradient(circle, #ff8a00 0%, #ffab3d 24%, #ffcb7a 40%, #ffe9bf 56%, rgba(255,253,245,0) 72%)",
         }}
       />
 
@@ -36,7 +36,7 @@ export default function HomePage() {
           to mymind's "warm light flooding in" hero atmosphere, built from
           Besty's own accent/brand colors rather than an unrelated palette.
         */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a0a0f]/88 via-[#4a1524]/50 to-[#ffb800]/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0c0508]/96 via-[#2a0d14]/80 to-[#1a0a0f]/45" />
         {/*
           The text sits in normal flow (not absolutely stretched to match the
           image), so the box always grows to fit however many lines the
