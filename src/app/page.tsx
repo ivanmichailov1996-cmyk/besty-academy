@@ -10,15 +10,28 @@ export default function HomePage() {
         <Image
           src={`${BASE_PATH}/images/welcome/restaurant-exterior.jpg`}
           alt="Ресторан Besty"
-          width={1600}
-          height={700}
+          fill
           priority
-          className="w-full h-[220px] sm:h-[300px] object-cover"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a0a0f]/80 via-[#1a0a0f]/30 to-transparent" />
-        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-4 sm:px-6 pb-6 sm:pb-8">
-          <p className="brand-logo text-brand text-lg mb-2">besty academy</p>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-white mb-3 max-w-2xl">
+        {/*
+          Warm burgundy-to-amber wash instead of a flat neutral scrim — a nod
+          to mymind's "warm light flooding in" hero atmosphere, built from
+          Besty's own accent/brand colors rather than an unrelated palette.
+        */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a0a0f]/88 via-[#4a1524]/50 to-[#ffb800]/10" />
+        {/*
+          The text sits in normal flow (not absolutely stretched to match the
+          image), so the box always grows to fit however many lines the
+          headline/paragraph wrap to on a given screen width. Previously the
+          overlay was pinned to the image's fixed height, so on narrow phones
+          the wrapped text overflowed upward and got sliced off by
+          overflow-hidden, making the "besty academy" label collide with the
+          headline. min-h keeps a decent amount of photo visible above that.
+        */}
+        <div className="relative flex flex-col items-center justify-end text-center px-4 sm:px-6 pt-16 pb-8 sm:pb-10 min-h-[280px] sm:min-h-[360px]">
+          <p className="label-eyebrow text-brand text-xs sm:text-sm mb-3">besty academy</p>
+          <h1 className="font-display text-3xl sm:text-6xl text-white mb-4 max-w-2xl leading-[1.05]">
             Обучающая платформа команды Besty
           </h1>
           <p className="text-white/85 text-sm sm:text-lg leading-relaxed max-w-xl">
@@ -33,10 +46,8 @@ export default function HomePage() {
         className="group flex flex-wrap sm:flex-nowrap items-center gap-5 rounded-3xl bg-brand p-6 sm:p-8 mb-4 hover:brightness-95 transition-all overflow-hidden"
       >
         <div className="flex-1 min-w-[200px]">
-          <span className="text-xs font-bold uppercase tracking-wide text-brand-ink/70">
-            Начни здесь
-          </span>
-          <h2 className="text-2xl font-extrabold text-brand-ink mt-1">👋 Welcome-курс</h2>
+          <span className="label-eyebrow text-xs text-brand-ink/70">Начни здесь</span>
+          <h2 className="font-display text-3xl text-brand-ink mt-1">👋 Welcome-курс</h2>
           <p className="text-brand-ink/80 text-sm mt-1 max-w-lg">
             Первый шаг в команде Besty: ресторан, команда, стандарты и безопасность — перед
             первой сменой.
@@ -47,7 +58,7 @@ export default function HomePage() {
           alt=""
           width={140}
           height={140}
-          className="hidden sm:block w-28 h-28 rounded-2xl object-cover flex-none shadow-md"
+          className="hidden sm:block w-28 h-28 rounded-2xl object-cover flex-none"
         />
         <span className="text-2xl font-bold text-brand-ink group-hover:translate-x-1 transition-transform">
           →
@@ -55,24 +66,24 @@ export default function HomePage() {
       </Link>
 
       <div className="grid sm:grid-cols-2 gap-4">
-        {sections.map((section) => {
+        {sections.map((section, i) => {
           const readyCount = section.lessons.filter((l) => l.ready).length;
+          const surfaces = ["bg-surface-amber", "bg-surface-blush", "bg-surface-sage"];
+          const surface = surfaces[i % surfaces.length];
           return (
             <Link
               key={section.slug}
               href={`/${section.slug}`}
-              className="group rounded-3xl border border-neutral-200 bg-white p-6 hover:border-brand hover:shadow-[0_4px_0_0_var(--brand)] transition-all"
+              className={`group rounded-2xl ${surface} p-6 sm:p-7 hover:brightness-[0.97] transition-all`}
             >
               <div className="flex items-start justify-between gap-3">
                 <span className="text-3xl">{section.emoji}</span>
-                <span className="text-xs font-semibold text-neutral-400 mt-1">
-                  {readyCount}/{section.lessons.length} уроков готово
+                <span className="label-eyebrow text-[11px] text-neutral-500 mt-1.5">
+                  {readyCount}/{section.lessons.length} готово
                 </span>
               </div>
-              <h2 className="mt-3 text-lg font-bold text-brand-ink group-hover:text-brand-dark">
-                {section.title}
-              </h2>
-              <p className="mt-1 text-sm text-neutral-600 leading-relaxed">{section.description}</p>
+              <h2 className="mt-3 font-display text-2xl text-brand-ink">{section.title}</h2>
+              <p className="mt-1 text-sm text-neutral-700 leading-relaxed">{section.description}</p>
             </Link>
           );
         })}

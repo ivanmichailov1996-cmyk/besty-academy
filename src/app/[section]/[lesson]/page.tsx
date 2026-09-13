@@ -25,7 +25,9 @@ export default async function LessonPage(props: PageProps<"/[section]/[lesson]">
       </Link>
 
       <article className="mt-4">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-brand-ink">{lesson.title}</h1>
+        <h1 className="font-display text-3xl sm:text-4xl text-brand-ink leading-tight">
+          {lesson.title}
+        </h1>
         <p className="mt-2 text-neutral-600">{lesson.summary}</p>
 
         <div className="mt-8">

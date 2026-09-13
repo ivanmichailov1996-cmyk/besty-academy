@@ -68,11 +68,11 @@ export function Quiz({
   }
 
   return (
-    <div className="mt-10 rounded-3xl border-2 border-brand/40 bg-amber-50/50 p-5 sm:p-6">
+    <div className="mt-10 rounded-2xl bg-surface-amber p-5 sm:p-6">
       <div className="flex items-center justify-between gap-3 mb-4">
-        <h3 className="text-lg font-extrabold text-brand-ink">Проверь себя</h3>
+        <h3 className="font-display text-xl text-brand-ink">Проверь себя</h3>
         {bestScore !== null && (
-          <span className="text-xs font-semibold text-brand-dark bg-white border border-brand/40 rounded-full px-3 py-1">
+          <span className="label-eyebrow text-[11px] text-brand-dark bg-white/70 rounded-full px-3 py-1.5">
             Лучший результат: {bestScore} из {questions.length}
           </span>
         )}

@@ -58,7 +58,7 @@ function useProgress() {
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-accent mb-2">
+    <div className="label-eyebrow flex items-center gap-2 text-xs text-accent mb-2">
       <span className="w-6 h-1.5 rounded-full bg-accent inline-block" />
       {children}
     </div>
@@ -68,7 +68,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 function SectionHeader({ number, children }: { number: string; children: React.ReactNode }) {
   return (
     <div className="flex items-start justify-between gap-4">
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-ink">{children}</h2>
+      <h2 className="font-display text-3xl sm:text-4xl text-brand-ink">{children}</h2>
       <span className="text-5xl sm:text-6xl font-black text-neutral-200 leading-none select-none">
         {number}
       </span>
@@ -95,12 +95,12 @@ function MarkDoneButton({ done, onClick }: { done: boolean; onClick: () => void 
 
 function Card({ tone = "light", children }: { tone?: "light" | "brand" | "accent" | "dark"; children: React.ReactNode }) {
   const styles: Record<string, string> = {
-    light: "bg-white border border-neutral-200",
+    light: "bg-surface-sage",
     brand: "bg-brand text-brand-ink",
     accent: "bg-accent text-white",
     dark: "bg-neutral-900 text-white",
   };
-  return <div className={`rounded-3xl p-5 sm:p-6 ${styles[tone]}`}>{children}</div>;
+  return <div className={`rounded-2xl p-5 sm:p-6 ${styles[tone]}`}>{children}</div>;
 }
 
 const PRINCIPLES = [
@@ -183,10 +183,8 @@ export function WelcomeCourse() {
       {/* Hero */}
       <div className="rounded-[2rem] bg-brand overflow-hidden grid lg:grid-cols-2 gap-0 mb-8">
         <div className="p-6 sm:p-10 flex flex-col justify-center">
-          <p className="text-xs font-bold uppercase tracking-wide text-brand-ink/70 mb-3">
-            Курс для новых сотрудников
-          </p>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-ink leading-tight mb-4">
+          <p className="label-eyebrow text-xs text-brand-ink/70 mb-3">Курс для новых сотрудников</p>
+          <h1 className="font-display text-4xl sm:text-5xl text-brand-ink leading-[1.05] mb-4">
             Твой старт в Besty
           </h1>
           <p className="text-brand-ink/80 text-base leading-relaxed mb-6">
@@ -366,7 +364,7 @@ export function WelcomeCourse() {
               {QUALITY_FACTS.map((fact) => (
                 <div
                   key={fact}
-                  className="text-sm rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-neutral-700"
+                  className="text-sm rounded-2xl bg-surface-sage px-4 py-3 text-neutral-700"
                 >
                   {fact}
                 </div>
@@ -568,7 +566,7 @@ export function WelcomeCourse() {
               ))}
             </div>
             <div className="space-y-3">
-              <details className="group rounded-2xl border border-neutral-200 bg-white p-4 open:pb-5">
+              <details className="group rounded-2xl bg-surface-sage p-4 open:pb-5">
                 <summary className="cursor-pointer font-bold text-brand-ink list-none flex items-center justify-between">
                   Гриль, томаторезка, пропариватель
                   <span className="text-neutral-400 group-open:rotate-45 transition-transform text-xl leading-none">+</span>
@@ -579,7 +577,7 @@ export function WelcomeCourse() {
                   <li>Пропариватель: запрещается вставлять посторонние предметы, руки или пальцы в отверстия; избегать контакта с паром.</li>
                 </ul>
               </details>
-              <details className="group rounded-2xl border border-neutral-200 bg-white p-4 open:pb-5">
+              <details className="group rounded-2xl bg-surface-sage p-4 open:pb-5">
                 <summary className="cursor-pointer font-bold text-brand-ink list-none flex items-center justify-between">
                   Тепловой шкаф и картофельный бин
                   <span className="text-neutral-400 group-open:rotate-45 transition-transform text-xl leading-none">+</span>
@@ -589,7 +587,7 @@ export function WelcomeCourse() {
                   <li>Продукцию укладывать только на специально предназначенные пластиковые лотки.</li>
                 </ul>
               </details>
-              <details className="group rounded-2xl border border-neutral-200 bg-white p-4 open:pb-5">
+              <details className="group rounded-2xl bg-surface-sage p-4 open:pb-5">
                 <summary className="cursor-pointer font-bold text-brand-ink list-none flex items-center justify-between">
                   Слайсер
                   <span className="text-neutral-400 group-open:rotate-45 transition-transform text-xl leading-none">+</span>
@@ -600,7 +598,7 @@ export function WelcomeCourse() {
                   <li>Незамедлительно выключать после окончания работ.</li>
                 </ul>
               </details>
-              <details className="group rounded-2xl border border-neutral-200 bg-white p-4 open:pb-5">
+              <details className="group rounded-2xl bg-surface-sage p-4 open:pb-5">
                 <summary className="cursor-pointer font-bold text-brand-ink list-none flex items-center justify-between">
                   Фритюр и тостер
                   <span className="text-neutral-400 group-open:rotate-45 transition-transform text-xl leading-none">+</span>

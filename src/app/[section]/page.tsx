@@ -19,37 +19,41 @@ export default async function SectionPage(props: PageProps<"/[section]">) {
 
       <div className="mt-4 mb-10">
         <span className="text-4xl">{section.emoji}</span>
-        <h1 className="mt-3 text-2xl sm:text-3xl font-extrabold text-brand-ink">{section.title}</h1>
+        <h1 className="mt-3 font-display text-3xl sm:text-5xl text-brand-ink">{section.title}</h1>
         <p className="mt-2 text-neutral-600">{section.description}</p>
       </div>
 
       <ul className="space-y-3">
-        {section.lessons.map((lesson) => (
-          <li key={lesson.slug}>
-            {lesson.ready ? (
-              <Link
-                href={`/${section.slug}/${lesson.slug}`}
-                className="flex items-center justify-between gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:p-5 hover:border-brand transition-colors"
-              >
-                <div>
-                  <p className="font-bold text-brand-ink">{lesson.title}</p>
-                  <p className="text-sm text-neutral-600 mt-0.5">{lesson.summary}</p>
+        {section.lessons.map((lesson, i) => {
+          const surfaces = ["bg-surface-amber", "bg-surface-blush", "bg-surface-sage"];
+          const surface = surfaces[i % surfaces.length];
+          return (
+            <li key={lesson.slug}>
+              {lesson.ready ? (
+                <Link
+                  href={`/${section.slug}/${lesson.slug}`}
+                  className={`flex items-center justify-between gap-4 rounded-2xl ${surface} p-4 sm:p-5 hover:brightness-[0.97] transition-all`}
+                >
+                  <div>
+                    <p className="font-bold text-brand-ink">{lesson.title}</p>
+                    <p className="text-sm text-neutral-700 mt-0.5">{lesson.summary}</p>
+                  </div>
+                  <span className="flex-none text-brand-ink font-bold text-xl">→</span>
+                </Link>
+              ) : (
+                <div className="flex items-center justify-between gap-4 rounded-2xl border border-dashed border-neutral-300 p-4 sm:p-5 opacity-70">
+                  <div>
+                    <p className="font-bold text-neutral-500">{lesson.title}</p>
+                    <p className="text-sm text-neutral-500 mt-0.5">{lesson.summary}</p>
+                  </div>
+                  <span className="label-eyebrow flex-none text-[11px] text-neutral-400 bg-neutral-100 rounded-full px-3 py-1">
+                    скоро
+                  </span>
                 </div>
-                <span className="flex-none text-brand-ink font-bold text-xl">→</span>
-              </Link>
-            ) : (
-              <div className="flex items-center justify-between gap-4 rounded-2xl border border-dashed border-neutral-300 p-4 sm:p-5 opacity-70">
-                <div>
-                  <p className="font-bold text-neutral-500">{lesson.title}</p>
-                  <p className="text-sm text-neutral-500 mt-0.5">{lesson.summary}</p>
-                </div>
-                <span className="flex-none text-xs font-semibold text-neutral-400 bg-neutral-100 rounded-full px-3 py-1">
-                  скоро
-                </span>
-              </div>
-            )}
-          </li>
-        ))}
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
