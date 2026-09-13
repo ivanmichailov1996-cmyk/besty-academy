@@ -209,7 +209,7 @@ export function WelcomeCourse() {
         </div>
         <div className="relative min-h-[220px]">
           <Image
-            src="/images/welcome/restaurant-exterior.jpg"
+            src={`${BASE_PATH}/images/welcome/restaurant-exterior.jpg`}
             alt="Ресторан Besty вечером"
             fill
             className="object-cover"
@@ -283,7 +283,7 @@ export function WelcomeCourse() {
             <div className="grid sm:grid-cols-2 gap-4 mt-5">
               <div className="relative rounded-3xl overflow-hidden min-h-[200px]">
                 <Image
-                  src="/images/welcome/restaurant-exterior.jpg"
+                  src={`${BASE_PATH}/images/welcome/restaurant-exterior.jpg`}
                   alt="Besty вечером"
                   fill
                   className="object-cover"
@@ -353,13 +353,13 @@ export function WelcomeCourse() {
             <SectionHeader number="04">Факты о нашем качестве</SectionHeader>
             <div className="grid grid-cols-3 gap-3 mt-5">
               <div className="relative rounded-3xl overflow-hidden aspect-square col-span-1">
-                <Image src="/images/welcome/burger.jpg" alt="Бургер Besty" fill className="object-cover" sizes="200px" />
+                <Image src={`${BASE_PATH}/images/welcome/burger.jpg`} alt="Бургер Besty" fill className="object-cover" sizes="200px" />
               </div>
               <div className="relative rounded-3xl overflow-hidden aspect-square col-span-1">
-                <Image src="/images/welcome/fries.jpg" alt="Картофель фри Besty" fill className="object-cover" sizes="200px" />
+                <Image src={`${BASE_PATH}/images/welcome/fries.jpg`} alt="Картофель фри Besty" fill className="object-cover" sizes="200px" />
               </div>
               <div className="relative rounded-3xl overflow-hidden aspect-square col-span-1">
-                <Image src="/images/welcome/tomato.jpg" alt="Свежие томаты" fill className="object-cover" sizes="200px" />
+                <Image src={`${BASE_PATH}/images/welcome/tomato.jpg`} alt="Свежие томаты" fill className="object-cover" sizes="200px" />
               </div>
             </div>
             <div className="grid sm:grid-cols-3 gap-2 mt-4">

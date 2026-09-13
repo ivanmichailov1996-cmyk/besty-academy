@@ -79,7 +79,7 @@ export function LessonBlocks({ blocks }: { blocks: ContentBlock[] }) {
               <figure key={i} className="my-5">
                 <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100">
                   <Image
-                    src={block.src}
+                    src={`${BASE_PATH}${block.src}`}
                     alt={block.alt}
                     width={800}
                     height={600}
@@ -100,7 +100,7 @@ export function LessonBlocks({ blocks }: { blocks: ContentBlock[] }) {
                   <figure key={j}>
                     <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100">
                       <Image
-                        src={img.src}
+                        src={`${BASE_PATH}${img.src}`}
                         alt={img.alt}
                         width={400}
                         height={300}

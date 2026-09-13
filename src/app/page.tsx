@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { sections } from "@/content/sections";
+import { BASE_PATH } from "@/lib/basePath";
 
 export default function HomePage() {
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-16">
       <section className="mb-14 overflow-hidden rounded-3xl relative">
         <Image
-          src="/images/welcome/restaurant-exterior.jpg"
+          src={`${BASE_PATH}/images/welcome/restaurant-exterior.jpg`}
           alt="Ресторан Besty"
           width={1600}
           height={700}
@@ -42,7 +43,7 @@ export default function HomePage() {
           </p>
         </div>
         <Image
-          src="/images/welcome/burger.jpg"
+          src={`${BASE_PATH}/images/welcome/burger.jpg`}
           alt=""
           width={140}
           height={140}
